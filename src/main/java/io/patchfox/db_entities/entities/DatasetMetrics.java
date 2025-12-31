@@ -1,0 +1,287 @@
+package io.patchfox.db_entities.entities;
+
+
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+
+
+@Entity
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Slf4j
+@ToString
+public class DatasetMetrics {
+
+    public enum RecommendationType {
+        REDUCE_CVES,
+        REDUCE_CVE_GROWTH,
+        REDUCE_CVE_BACKLOG,
+        REDUCE_CVE_BACKLOG_GROWTH,
+        REDUCE_STALE_PACKAGES,
+        REDUCE_STALE_PACKAGES_GROWTH,
+        REDUCE_DOWNLEVEL_PACKAGES,
+        REDUCE_DOWNLEVEL_PACKAGES_GROWTH,
+        GROW_PATCH_EFFICACY,
+        REMOVE_REDUNDANT_PACKAGES,
+    }
+
+    //
+
+    @ManyToOne()
+    @JoinColumn(nullable = false, name = "dataset_id")
+    private Dataset dataset;
+
+    //
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "datasetMetrics", cascade = CascadeType.ALL)
+    private Set<Edit> edits;
+
+    //
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ElementCollection
+    @CollectionTable(
+        name = "package_family",
+        joinColumns = { @JoinColumn(name = "dataset_metrics_id") }
+    )
+    @Column(name = "package_family")
+    private Set<String> packageFamilies;
+
+    @Column(name = "package_indexes")
+    private List<Long> packageIndexes;
+
+    @Column(nullable = false)  
+    private long datasourceCount;
+
+    @Column(nullable = false)  
+    private long datasourceEventCount;
+
+    @Column(nullable = false)  
+    private ZonedDateTime commitDateTime;
+
+    @Column(nullable = false)  
+    private ZonedDateTime eventDateTime;
+
+    @Column()  
+    private ZonedDateTime forecastMaturityDate;
+
+    @Column(nullable = false)
+    private UUID txid;
+
+    @Column(nullable = false)
+    private UUID jobId;
+
+    @Column(nullable = false)
+    private boolean isCurrent;
+
+    @Column(nullable = false)
+    private boolean isForecastSameCourse;
+
+    @Column(nullable = false)
+    private boolean isForecastRecommendationsTaken;
+
+    @Enumerated(EnumType.STRING)
+    @Column()
+    private RecommendationType recommendationType;
+
+    @Column()
+    private String recommendationHeadline;
+
+    //
+
+    @Column()
+    private double rpsScore;
+
+    //
+
+    @Column()
+    private long totalFindings;
+
+    @Column()
+    private long criticalFindings;
+
+    @Column()
+    private long highFindings;
+
+    @Column()
+    private long mediumFindings;
+
+    @Column()
+    private long lowFindings;
+
+    //
+
+    @Column()
+    private long findingsAvoidedByPatchingPastYear;
+
+    @Column()
+    private long criticalFindingsAvoidedByPatchingPastYear;
+
+    @Column()
+    private long highFindingsAvoidedByPatchingPastYear;
+
+    @Column()
+    private long mediumFindingsAvoidedByPatchingPastYear;
+
+    @Column()
+    private long lowFindingsAvoidedByPatchingPastYear;
+
+    //
+
+    @Column()
+    private double findingsInBacklogBetweenThirtyAndSixtyDays;
+
+    @Column()
+    private double criticalFindingsInBacklogBetweenThirtyAndSixtyDays;
+
+    @Column()
+    private double highFindingsInBacklogBetweenThirtyAndSixtyDays;
+
+    @Column()
+    private double mediumFindingsInBacklogBetweenThirtyAndSixtyDays;
+
+    @Column()
+    private double lowFindingsInBacklogBetweenThirtyAndSixtyDays;
+
+    //
+
+    @Column()
+    private double findingsInBacklogBetweenSixtyAndNinetyDays;
+
+    @Column()
+    private double criticalFindingsInBacklogBetweenSixtyAndNinetyDays;
+
+    @Column()
+    private double highFindingsInBacklogBetweenSixtyAndNinetyDays;
+
+    @Column()
+    private double mediumFindingsInBacklogBetweenSixtyAndNinetyDays;
+
+    @Column()
+    private double lowFindingsInBacklogBetweenSixtyAndNinetyDays;
+
+    //
+
+    @Column()
+    private double findingsInBacklogOverNinetyDays;
+
+    @Column()
+    private double criticalFindingsInBacklogOverNinetyDays;
+    
+    @Column()
+    private double highFindingsInBacklogOverNinetyDays;
+
+    @Column()
+    private double mediumFindingsInBacklogOverNinetyDays;
+
+    @Column()
+    private double lowFindingsInBacklogOverNinetyDays;
+
+    //
+
+    @Column()
+    private long packages;
+
+    @Column()
+    private long packagesWithFindings;
+
+    @Column()
+    private long packagesWithCriticalFindings;
+
+    @Column()
+    private long packagesWithHighFindings;
+
+    @Column()
+    private long packagesWithMediumFindings;
+
+    @Column()
+    private long packagesWithLowFindings;
+
+    //
+
+    @Column()
+    private long downlevelPackages;
+
+    @Column()
+    private long downlevelPackagesMajor;
+
+    @Column()
+    private long downlevelPackagesMinor;
+
+    @Column()
+    private long downlevelPackagesPatch;
+
+    //
+
+    @Column()
+    private long stalePackages;
+
+    @Column()
+    private long stalePackagesSixMonths;
+
+    @Column()
+    private long stalePackagesOneYear;
+
+    @Column()
+    private long stalePackagesOneYearSixMonths;
+
+    @Column()
+    private long stalePackagesTwoYears;
+
+    //
+
+    @Column()
+    private long patches;
+
+    @Column()
+    private long samePatches;
+
+    @Column()
+    private long differentPatches;
+
+    @Column()
+    private long patchFoxPatches;
+
+    //
+
+    @Column()
+    private double patchEfficacyScore;
+
+    @Column()
+    private double patchImpact;
+
+    @Column
+    private double patchEffort;
+
+}

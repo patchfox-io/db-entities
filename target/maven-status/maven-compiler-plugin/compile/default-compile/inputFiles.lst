@@ -1,0 +1,12 @@
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/db_entities/entities/DatasourceEvent.java
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/QueryDslHelpers.java
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/db_entities/entities/Finding.java
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/db_entities/entities/Package.java
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/db_entities/entities/Dataset.java
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/db_entities/entities/Datasource.java
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/db_entities/entities/DatasourceMetrics.java
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/db_entities/entities/DatasourceMetricsCurrent.java
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/db_entities/entities/FindingData.java
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/db_entities/entities/DatasetMetrics.java
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/db_entities/entities/FindingReporter.java
+/home/snerd/patchfox_gitlab/db-entities/src/main/java/io/patchfox/db_entities/entities/Edit.java
