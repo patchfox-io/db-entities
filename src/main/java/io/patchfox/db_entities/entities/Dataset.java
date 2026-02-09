@@ -93,7 +93,7 @@ public class Dataset implements Serializable {
     private String name;
 
     public void setName(String datasetName) {
-        this.name = datasetName.toUpperCase();
+        this.name = datasetName;
     }
 
 
