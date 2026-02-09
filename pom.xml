@@ -6,7 +6,7 @@
 
   <groupId>io.patchfox.db-entities</groupId>
   <artifactId>db-entities</artifactId>
-  <version>1.0.32</version>
+  <version>1.0.33</version>
   <name>db-entities</name>
 
   <properties>
