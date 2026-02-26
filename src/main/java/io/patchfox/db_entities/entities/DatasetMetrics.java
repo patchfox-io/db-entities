@@ -70,13 +70,7 @@ public class DatasetMetrics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ElementCollection
-    @CollectionTable(
-        name = "package_family",
-        joinColumns = { @JoinColumn(name = "dataset_metrics_id") }
-    )
-    @Column(name = "package_family")
-    private Set<String> packageFamilies;
+
 
     @Column(name = "package_indexes")
     private List<Long> packageIndexes;
